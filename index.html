@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculadora Nota PAU 2026 - Calcula tu nota sobre 14</title>
+  <meta name="description" content="Calculadora gratuita para calcular tu nota PAU 2026. Calcula tu nota de acceso a la universidad sobre 14 con ponderaciones actualizadas.">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- AQUÍ VA ADSENSE CUANDO LO TENGAS -->
+  <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #4e73df, #1cc88a);
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      max-width: 500px;
+      width: 100%;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    h2 {
+      margin-top: 25px;
+      font-size: 18px;
+      color: #444;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin: 5px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 15px;
+      border: none;
+      border-radius: 8px;
+      background: #4e73df;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #2e59d9;
+    }
+
+    #resultado {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .info {
+      margin-top: 30px;
+      font-size: 14px;
+      color: #555;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+<h1>Calculadora Nota PAU 2026</h1>
+
+<h2>Bachillerato</h2>
+<input type="number" id="primero" placeholder="Nota 1º Bach (0-10)" step="0.01" min="0" max="10">
+<input type="number" id="segundo" placeholder="Nota 2º Bach (0-10)" step="0.01" min="0" max="10">
+
+<h2>Fase General</h2>
+<input type="number" id="mates" placeholder="Matemáticas" step="0.01" min="0" max="10">
+<input type="number" id="historia" placeholder="Historia / Filosofía" step="0.01" min="0" max="10">
+<input type="number" id="ingles" placeholder="Inglés" step="0.01" min="0" max="10">
+<input type="number" id="lengua" placeholder="Lengua" step="0.01" min="0" max="10">
+
+<h2>Fase Específica</h2>
+<input type="number" id="opt1" placeholder="Primera optativa" step="0.01" min="0" max="10">
+<select id="pond1">
+  <option value="0.2">Pondera 0.2</option>
+  <option value="0.1">Pondera 0.1</option>
+</select>
+
+<input type="number" id="opt2" placeholder="Segunda optativa" step="0.01" min="0" max="10">
+<select id="pond2">
+  <option value="0.2">Pondera 0.2</option>
+  <option value="0.1">Pondera 0.1</option>
+</select>
+
+<button onclick="calcularNota()">Calcular nota sobre 14</button>
+
+<div id="resultado"></div>
+
+<div class="info">
+<h2>¿Cómo se calcula la nota PAU?</h2>
+<p>
+La nota de acceso a la universidad se calcula combinando la media de Bachillerato (60%) y la fase general (40%). 
+La fase específica permite sumar hasta 4 puntos adicionales dependiendo de las ponderaciones (0.1 o 0.2).
+</p>
+<p>
+Esta calculadora de nota PAU 2026 te permite obtener tu nota final sobre 14 de forma automática.
+</p>
+</div>
+
+</div>
+
+<script>
+function validar(nota) {
+  if (nota < 0 || nota > 10) {
+    alert("Las notas deben estar entre 0 y 10");
+    throw new Error("Nota inválida");
+  }
+}
+
+function calcularNota() {
+
+  let primero = parseFloat(document.getElementById("primero").value) || 0;
+  let segundo = parseFloat(document.getElementById("segundo").value) || 0;
+
+  let mates = parseFloat(document.getElementById("mates").value) || 0;
+  let historia = parseFloat(document.getElementById("historia").value) || 0;
+  let ingles = parseFloat(document.getElementById("ingles").value) || 0;
+  let lengua = parseFloat(document.getElementById("lengua").value) || 0;
+
+  let opt1 = parseFloat(document.getElementById("opt1").value) || 0;
+  let opt2 = parseFloat(document.getElementById("opt2").value) || 0;
+
+  validar(primero);
+  validar(segundo);
+  validar(mates);
+  validar(historia);
+  validar(ingles);
+  validar(lengua);
+  validar(opt1);
+  validar(opt2);
+
+  let pond1 = parseFloat(document.getElementById("pond1").value);
+  let pond2 = parseFloat(document.getElementById("pond2").value);
+
+  let notaBase =
+    (primero * 0.3) +
+    (segundo * 0.3) +
+    (mates * 0.1) +
+    (historia * 0.1) +
+    (ingles * 0.1) +
+    (lengua * 0.1);
+
+  let notaFinal = notaBase + (opt1 * pond1) + (opt2 * pond2);
+
+  document.getElementById("resultado").innerText =
+    "Tu nota final sobre 14 es: " + notaFinal.toFixed(2);
+}
+</script>
+
+</body>
+</html>
